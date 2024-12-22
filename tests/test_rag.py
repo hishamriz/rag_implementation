@@ -1,6 +1,6 @@
 # generator/generator.py
 
-from openai import OpenAI
+import openai
 from config import API_CONFIG
 from typing import List, Dict
 import json
@@ -14,7 +14,7 @@ class DateTimeEncoder(json.JSONEncoder):
 
 class ResponseGenerator:
     def __init__(self):
-        self.client = OpenAI(api_key=API_CONFIG['openai_api_key'])
+        openai.api_key = API_CONFIG['openai_api_key']
         
     def generate_response(self, query: str, context: List[Dict]) -> str:
         """Generate a response using the retrieved context"""
@@ -31,7 +31,7 @@ Answer this question: {query}
 Provide a clear and concise response using only the information given in the context."""
 
         try:
-            response = self.client.chat.completions.create(
+            response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "You are a port operations assistant. Provide accurate information based solely on the given context."},

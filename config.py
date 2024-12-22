@@ -18,3 +18,7 @@ DB_CONFIG = {
 }
 
 # Rest of your config remains the same...
+# Rest of your config remains the same...
+API_CONFIG = {
+    'openai_api_key': os.getenv('OPENAI_API_KEY'),  # Fetches the API key from the environment variable
+}
